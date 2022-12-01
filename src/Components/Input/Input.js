@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { MdAddCircle } from "react-icons/md";
-import MdAddCircle from "react-icons/md/MdAddCircle";
+import React from "react";
+import Proptypes from "prop-types";
+
+InputForm.propTypes = {
+  addTask: Proptypes.func.isRequired
+};
 
 function InputForm({ addTask }) {
   const [userInput, setUserInput] = useState("");
 
-  handleChange = (event) => {
+  const handleChange = (event) => {
     setUserInput(event.target.value);
   };
 
-  handleSubmit = () => {
+  const handleSubmit = () => {
     if (!userInput) return;
     addTask(userInput);
     setUserInput("");

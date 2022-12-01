@@ -1,11 +1,19 @@
 import { MdDelete } from "react-icons/md";
+import React from "react";
+import PropTypes from "prop-types";
+
+ToDoItem.propTypes = {
+  task: PropTypes.object.isRequired,
+  deleteTask: PropTypes.func.isRequired,
+  toggleTask: PropTypes.func.isRequired,
+};
 
 function ToDoItem({ task, deleteTask, toggleTask }) {
-  handleDelete = (event) => {
+  const handleDelete = (event) => {
     event.preventDefault();
     deleteTask(task.id);
   };
-  handleToggle = () => {
+  const handleToggle = () => {
     toggleTask(task.id);
   };
   return (
