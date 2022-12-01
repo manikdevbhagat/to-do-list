@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Heading from "./Components/Heading/Heading";
+import InputForm from "./Components/Input/Input";
+import ToDoList from "./Components/ToDoList/ToDoList";
 
 function App() {
+  const [toDoList, setToDoList] = useState([]);
+
+  addTask = (data) => {
+    const copy = toDoList.push({
+      id: toDoList.length + 1,
+      task: data,
+      done: false,
+    });
+    setToDoList(copy);
+  };
+
+  deleteTask = (id) => {
+    const copy = toDoList.filter((item) => item.id !== id);
+    setToDoList(copy);
+  };
+
+  toggleTask = (id) => {
+    const mapped = toDoList.map((task) =>
+      task.id === Number(id) ? { ...task, done: !task.done } : task
+    );
+    setToDoList(mapped);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Heading />
+      <InputForm addTask={addTask} />
+      <ToDoList
+        toDoList={toDoList}
+        deleteTask={deleteTask}
+        toggleTask={toggleTask}
+      />
     </div>
   );
 }
